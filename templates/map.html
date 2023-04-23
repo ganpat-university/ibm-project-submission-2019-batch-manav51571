@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <title> Truelty | Map </title>
+      <link rel="icon" type="image/png" href="{{ url_for('static', filename= 'fliqs-assets/images/favicon.png')}}" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&amp;display=swap" />
+   
+
+      <script>
+         L_NO_TOUCH = false;
+         L_DISABLE_3D = true;
+      </script>
+      <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+      <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+      <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+      <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+
+
+<!--       <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/js/autoComplete.min.js"></script>
+      <script type="text/javascript" src="{{url_for('static', filename='own-assets/js/autocomplete.js')}}"></script> -->
+
+
+      <meta name="viewport" content="width=device-width,
+         initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      <style>
+         #map_world {
+         position: relative;
+         width: 100.0%;
+         height: 100.0%;
+         left: 0.0%;
+         top: 0.0%;
+         }
+         .leaflet-container { font-size: 1rem; }
+      </style>
+      <!-- End of map -->
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&amp;display=swap" />
+      <link rel="stylesheet" href="{{ url_for('static', filename= 'fliqs-assets/vendor/swiper/swiper-bundle.minafa4.css')}}" />
+      <link rel="stylesheet" href="{{ url_for('static', filename= 'fliqs-assets/vendor/fancybox/dist/jquery.fancybox.min438f.css')}}" />
+      <link rel="stylesheet" href="{{ url_for('static', filename= 'fliqs-assets/css/bootstrap-custom.min24ee.css')}}" />
+      <link rel="stylesheet" href="{{ url_for('static', filename= 'fliqs-assets/css/fliqs.min24ee.css')}}" />
+      <link rel="stylesheet" href="{{ url_for('static', filename= 'fliqs-assets/css/custom24ee.css')}}" />
+      <script src="{{ url_for('static', filename= 'fliqs-assets/vendor/jquery/dist/jquery.min45e0.js')}}"></script>
+      <script src="{{ url_for('static', filename= 'fliqs-assets/js/preloader.min24ee.js')}}"></script>
+      <link href='https://fonts.googleapis.com/css?family=Finger Paint' rel='stylesheet'>
+   
+
+<style>
+   .autocomplete-items div {
+   padding: 2px;
+   margin: auto;
+  cursor: pointer;
+  background-color: transparent; 
+}
+
+</style>
+
+
+
+   </head>
+   <body id="page" class="flq-navbar-icons-existence">
+      <div class="flq-preloader">
+         <div class="flq-preloader-title display-1 h1" style="font-family: 'Finger Paint'; font-size: 60px;">
+            <span>t</span>
+            <span>r</span>
+            <span>u</span>
+            <span>e</span>
+            <span>l</span>
+            <span>t</span>
+            <span>y</span>
+         </div>
+      </div>
+      <div class="flq-preloader-bg"></div>
+      <nav class="flq-navbar flq-navbar-top flq-navbar-top-fixed" >
+         <div class="flq-navbar-container container-fluid">
+            <!-- <button class="btn btn-link me-4" data-bs-toggle="offcanvas" data-bs-target="#flq_offcanvas">
+               <span></span>
+               <span></span>
+               <span></span>
+               </button> -->
+            <a href="/" class="flq-navbar-brand me-auto">
+            <img src="{{ url_for('static', filename= 'fliqs-assets/images/logo.png')}}" class="flq-logo" alt="" style="width: 100px;">
+            </a>
+         </div>
+
+
+<button class="btn btn-link btn-icon-md ms-5 d-none d-sm-flex" data-fancybox data-src="#flq_popup_search" data-base-class="flq-fancybox-search" data-animation-duration="1000" data-keyboard="false" data-auto-focus="true" data-touch="false" data-close-existing="true" data-small-btn="false" data-toolbar="false" style="padding-right: 50px; " >
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M10.0833 17.4167C14.1334 17.4167 17.4167 14.1334 17.4167 10.0833C17.4167 6.03325 14.1334 2.75 10.0833 2.75C6.03325 2.75 2.75 6.03325 2.75 10.0833C2.75 14.1334 6.03325 17.4167 10.0833 17.4167Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+               <path d="M19.25 19.25L15.2625 15.2625" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+         </button>
+
+
+      </nav>
+      
+      <div class="folium-map" id="map_world" style="z-index: 0;"></div>
+
+
+
+
+
+<div class="flq-fancybox-content-search fancybox-content" id="flq_popup_search">
+    <div class="flq-search">
+        <div class="flq-fancybox-body pb-6">
+            <div class="container-small">
+                
+                <div class="flq-search-content ">
+
+
+                  <div class="autocomplete" >                  
+
+                    <form action="{{ url_for('search') }}" method="POST" autocomplete="off">
+                     
+
+                        <input class="form-control form-control-lg flq-form-glass flq-search-input" type="text" name="search_term" placeholder="Type to Search" id="myInput">
+
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+
+                        <button class="btn btn-link btn-icon-md flq-search-btn" type="submit">
+                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.0833 17.4167C14.1334 17.4167 17.4167 14.1334 17.4167 10.0833C17.4167 6.03325 14.1334 2.75 10.0833 2.75C6.03325 2.75 2.75 6.03325 2.75 10.0833C2.75 14.1334 6.03325 17.4167 10.0833 17.4167Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M19.25 19.25L15.2625 15.2625" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+
+                    </form>
+                  </div>
+
+<script src="{{ url_for('static', filename= 'own-assets/js/name_dropdown.js')}}"></script>
+
+<script type="text/javascript">
+   
+/*An array containing all the country names in the world:*/
+var countries = ["San Francisco"];
+
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+autocomplete(document.getElementById("myInput"), countries);
+
+</script>
+
+
+                </div>
+            </div>
+        </div>
+
+
+           <div class="flq-fancybox-head">
+               <div class="container-fluid">
+                  <a href="/" class="flq-fancybox-brand me-auto">
+                  <img src="{{ url_for('static', filename= 'fliqs-assets/images/logo.png')}}" class="flq-logo" alt="" style="width: 100px;">
+                  </a>
+                  <button class="flq-fancybox-close btn btn-link ms-4" data-fancybox-close>
+                  <span></span>
+                  </button>
+               </div>
+            </div>
+
+         </div>
+      </div>
+
+      <script src="{{ url_for('static', filename= 'fliqs-assets/vendor/object-fit-images/dist/ofi.mind3bb.js')}}"></script>
+      <script src="{{ url_for('static', filename= 'fliqs-assets/vendor/%40popperjs/core/dist/umd/popper.minc927.js')}}"></script>
+      <script src="{{ url_for('static', filename= 'fliqs-assets/vendor/scrollreveal/dist/scrollreveal.minbc3e.js')}}"></script>
+      <script src="{{ url_for('static', filename= 'fliqs-assets/vendor/rellax/rellax.min4f96.js')}}"></script>
+      <script src="{{ url_for('static', filename= 'fliqs-assets/vendor/vanilla-tilt/dist/vanilla-tilt.minfe21.js')}}"></script>
+      <script src="{{ url_for('static', filename= 'fliqs-assets/vendor/animejs/lib/anime.min2167.js')}}"></script>
+      <script src="{{ url_for('static', filename= 'fliqs-assets/vendor/bootstrap/dist/js/bootstrap.minc420.js')}}"></script>
+      <script src="{{ url_for('static', filename= 'fliqs-assets/vendor/jarallax/dist/jarallax.min327d.js')}}"></script>
+      <script src="{{ url_for('static', filename= 'fliqs-assets/vendor/swiper/swiper-bundle.minafa4.js')}}"></script>
+      <script src="{{ url_for('static', filename= 'fliqs-assets/vendor/fancybox/dist/jquery.fancybox.min438f.js')}}"></script>
+      <script src="{{ url_for('static', filename= 'fliqs-assets/vendor/jquery-countdown/dist/jquery.countdown.mind1f1.js')}}"></script>
+      <script src="{{ url_for('static', filename= 'fliqs-assets/vendor/moment/min/moment.min63eb.js')}}"></script>
+      <script src="{{ url_for('static', filename= 'fliqs-assets/vendor/moment-timezone/builds/moment-timezone-with-data.minc112.js')}}"></script>
+      <script src="{{ url_for('static', filename= 'fliqs-assets/vendor/imagesloaded/imagesloaded.pkgd.mine781.js')}}"></script>
+      <script src="{{ url_for('static', filename= 'fliqs-assets/vendor/isotope-layout/dist/isotope.pkgd.minaf3e.js')}}"></script>
+      <script src="{{ url_for('static', filename= 'fliqs-assets/vendor/bootstrap-validator/dist/validator.minfb28.js')}}"></script>
+      <script src="{{ url_for('static', filename= 'fliqs-assets/js/fliqs.min24ee.js')}}"></script>
+      <script src="{{ url_for('static', filename= 'fliqs-assets/js/fliqs-init24ee.js')}}"></script>
+   </body>
+   <script>
+      var map_world = L.map(
+          "map_world",
+          {
+              center: [40.5, 10.5],
+              crs: L.CRS.EPSG3857,
+              zoom: 2.4,
+              zoomControl: true,
+              preferCanvas: false,
+          }
+      );
+      
+      
+      
+      var tile_layer_world = L.tileLayer(
+          "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+      ).addTo(map_world);
+      
+      
+      var circle_marker_SF = L.circleMarker(
+          [37.7749, -122.4194],
+          {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+      ).addTo(map_world);
+      
+      
+      var popup_SF = L.popup({"maxWidth": "100%"});
+      
+      
+          var html_SF = $(`<div id="html_SF" style="justify-content:center; text-align:center; width:70px;"><a href='sf_home'>San Francisco</a></div>`)[0];
+          popup_SF.setContent(html_SF);
+      
+      
+      circle_marker_SF.bindPopup(popup_SF);
+      
+      
+   </script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+   <script type="text/javascript">
+      $(".leaflet-control-container").empty();
+      
+      setInterval(function () { map_world.invalidateSize(); }, 100);
+      
+   </script>
+</html>
